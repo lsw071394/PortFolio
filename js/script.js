@@ -40,14 +40,20 @@ var htmlEl = document.documentElement,
     _timer;
 
 
-console.log(MenuEls);
+
+var contactEl = document.querySelector('.contact');
+var contactbodyEl =document.querySelector('.contactbody');
+var avavEl = document.querySelector('.avav');
+
 reset();
 
-
+viewgear();
 function reset(){ 
     navEl.style.transform = 'translateX(100%)';
-    navEl.style.borderRadius = '0 0 0 0';
-    MenuEls[0].classList.add('active');
+    contactbodyEl.style.transform = 'translateY(100%)';
+    
+    // navEl.style.borderRadius = '0 0 0 0';
+    // MenuEls[0].classList.add('active');
 }
 
 // 새로고침시 화면 상단으로 이동
@@ -75,7 +81,7 @@ setTimeout(function(){
 setTimeout(function(){
     scrolliconEl.style.opacity = '1';
 }, 3500);
-window.addEventListener("mousewheel", onscroll, {passive:false})
+window.addEventListener("mousewheel", onscroll, {passive:false})    
 
 
 function onscroll(e){
@@ -86,6 +92,7 @@ function onscroll(e){
     if(e.type ==="mousewheel"){
         if(e.wheelDelta < 0){
             articleDown();
+            
         }
         else if(e.wheelDelta > 0){
             articleUp();
@@ -108,12 +115,14 @@ function articleUp(){
     if(current > 0){
         current--;
         var currentResult =  current * -100;
-        section.style.transform = 'translateY('+ currentResult +'vh)';   
-        section.style.transition = 'all 1s ease';     
+        section.style.transform = 'translateY('+ currentResult +'vh)';
+        section.style.transition = 'all 1s ease';
+        
     }
-    gear2El.style.animation = 'unarticle1 1s linear forwards';    
+    gear2El.style.animation = 'unarticle1 1s linear forwards'; 
     ProgressbarFill();
     tEnd();
+    viewgear();
 }
 // 아티클 아래로 이동
 function articleDown(){
@@ -121,23 +130,36 @@ function articleDown(){
         current++;
         var currentResult =  current * -100;
         section.style.transform = 'translateY('+ currentResult +'vh)';
-        
-        section.style.transition = 'all 1s ease';     
-        
+        section.style.transition = 'all 1s ease';             
     }else if(current > articleEl.length){
         return false;
     }
     for(var i = 1; i < articleEl.length; i++){
         articleEl[i].style.visibility = 'visible';
     }
+    
+    
+    // avavEl.style.animation = 'rotation 3s infinite';
     ProgressbarFill();
     tEnd();
-
+    viewgear();
     
 }
 
+function viewgear(){
+    if(current == 0){
+        avavEl.style.visibility = 'hidden';
+    }
+    setTimeout(function(){
+        if(current !=0){
+            avavEl.style.visibility = 'visible';
+        }
+    },1000)
+    
+}
+
+
 function ProgressbarFill(){
-    if(current == 3){
         if(current == 3){
             gear2El.style.animation = 'article3 1s linear forwards'
             setTimeout(function(){
@@ -154,11 +176,8 @@ function ProgressbarFill(){
                 progerssEls[2].style.animation = 'jquery 1.5s ease-in-out';
                 progerssEls[3].style.animation = 'illust 1.5s ease-in-out';
                 progerssEls[4].style.animation = 'photo 1.5s ease-in-out';
-                
-                
             },1000);   
         }
-    }
 }
 
 
@@ -189,6 +208,34 @@ function MenuChange(){
 }
 MenuEl.addEventListener('click',MenuChange);
 
+fatimesEl = document.querySelector('.fa-times');
+
+fatimesEl.addEventListener('click', closecontact);
+contactEl.addEventListener('click', opencontact);
+
+function closecontact(){
+    contactbodyEl.style.transform = 'translateY(100%)';
+    contactbodyEl.style.transition = 'all 0.5s ease-in-out'
+}
+
+
+function opencontact(e){
+    opencontactbody();
+    toggle = !toggle;
+}
+function opencontactbody(){
+    if(toggle){
+        contactbodyEl.style.transform = 'scale(1)';
+        contactbodyEl.style.opacity = '1';
+        contactbodyEl.style.transform = 'translateY(0)';
+    }
+    else if(!toggle){
+        contactbodyEl.style.transform = 'scale(1)';
+        contactbodyEl.style.opacity = '1';
+        contactbodyEl.style.transform = 'translateY(100%)';
+    }
+    contactbodyEl.style.transition = 'all 0.5s ease-in-out'
+}
 
 // 메뉴 오픈시
 function openmenu(){
@@ -225,6 +272,8 @@ function onClickMenu(e){
     section.style.transition = 'all 1s ease';  
     current = indexEl; 
     ProgressbarFill();
+    viewgear();
+    
 }
 
 
@@ -251,6 +300,8 @@ function onClickViewItem(e) {
         if(_exId !== null) viewItemEls[_exId].classList.remove("selected");
         el.classList.add("selected");
         _exId = _cuId;
+    }else if(el.classList.contains("selected")){
+        el.classList.remove('selected');
     }
 }
 function onClickClose(e) {
