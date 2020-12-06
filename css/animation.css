@@ -30,7 +30,9 @@
 
     100% {-webkit-transform: rotate(-360deg);}
 }
-
+@-webkit-keyframes gearRotate{
+    100% {-webkit-transform: rotate(-360deg);}
+}
 
 
 @-webkit-keyframes rotateGear{
@@ -76,26 +78,10 @@
 }
 
 @-webkit-keyframes html{
-    0%{width: 0;}
-    100%{width: 80%;}
+    0%{transform: rotate(0);}
+    100%{transform: rotate(30deg);}
 }
 
-@-webkit-keyframes js{
-    0%{width: 0;}
-    100%{width: 50%;}
-}
-@-webkit-keyframes jquery{
-    0%{width: 0;}
-    100%{width: 40%;}
-}
-@-webkit-keyframes illust{
-    0%{width: 0;}
-    100%{width: 60%;}
-}
-@-webkit-keyframes photo{
-    0%{width: 0;}
-    100%{width: 60%;}
-}
 
 
 @-webkit-keyframes subtextgear{

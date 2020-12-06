@@ -12,6 +12,7 @@ console.log("Script Load");
 
         var _isAni = false; // 애니메이션 여부를 판단하는 Boolean 변수 true
 
+        
         function init() {
             // 초기화 함수.
             layout();
@@ -32,8 +33,8 @@ console.log("Script Load");
             _this.$btnPaddleNext = _this.$paddleNav.find('button.arrow.next');
 
             // dot navigation
-            _this.$dotNav = _this.$banner.find('.dot-nav');
-            _this.$dotEl = _this.$dotNav.find('span');
+            _this.$dotNav = $('.dot-nav');
+            _this.$dotEl = _this.$dotNav.find('img');
 
             // banner
             _this.$wrap = _this.$banner.children('.banner-wrap');
@@ -78,6 +79,7 @@ console.log("Script Load");
             }else if($el.hasClass('next')) {
                 console.log('다음');
                 _cuId++; // 클릭 이벤트가 발생될 때마다 1씩 증가
+                
 
                 // _cuId 가 마지막 이지미 번호일 때 다음 이미지가 있다.
                 if(_cuId > _max - 1){
@@ -108,7 +110,7 @@ console.log("Script Load");
 
             _isAni = true; // 애니메이션이 이뤄지는 중 - 클릭을 방지
             //console.log(_cuId);
-            var left = 1000 * _cuId * -1;
+            var left = 1200 * _cuId * -1;
             var duration = 350 + Math.abs(_exId - _cuId) * 150;
             // 기본 속도는 350 ----- + 이동하려는 ID와의 간격에 따라 150 속도를 추가
             // 1 - 350 + 150
