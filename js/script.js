@@ -49,7 +49,7 @@ reset();
 
 function reset(){ 
     navEl.style.transform = 'translateX(100%)';
-    contactbodyEl.style.transform = 'translateY(100%)';
+    contactbodyEl.style.transform = 'translate(-50%,-50%) scale(0)';
 
 }
 
@@ -109,31 +109,6 @@ MenuEl.addEventListener('click',MenuChange);
 
 
 
-fatimesEl = document.querySelector('.fa-times');
-fatimesEl.addEventListener('click', closecontact);
-contactEl.addEventListener('click', opencontact);
-
-function closecontact(){
-    for(var i = 0; i <gear.length; i++){
-        gear[i].style.opacity = '0.3';
-        gear[i].style.transition = 'all .5s ease-in'
-
-    }
-    contactbodyEl.style.transform = 'translateY(100%)';
-    contactbodyEl.style.transition = 'all 0.5s ease-in-out'
-}
-
-
-function opencontact(e){
-    for(var i = 0; i <gear.length; i++){
-        gear[i].style.opacity = '1';
-        gear[i].style.transition = 'all 1s ease-in'
-    }
-        contactbodyEl.style.transform = 'scale(1)';
-        contactbodyEl.style.opacity = '1';
-        contactbodyEl.style.transform = 'translateY(0)';
-        contactbodyEl.style.transition = 'all 0.5s ease-in-out';
-}
 
 
 // 메뉴 오픈시
@@ -147,7 +122,7 @@ function openmenu(){
         navMenuEl.style.transition = 'opacity 0.3s ease-in-out';
         setTimeout(function(){    
             navMenuEl.style.opacity = '1';
-        },500);
+        },300);
     }
     else if(!toggle){
         navEl.style.transform = 'scale(0)';

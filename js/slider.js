@@ -110,7 +110,7 @@ console.log("Script Load");
 
             _isAni = true; // 애니메이션이 이뤄지는 중 - 클릭을 방지
             //console.log(_cuId);
-            var left = 1200 * _cuId * -1;
+            var left = 1400 * _cuId * -1;
             var duration = 350 + Math.abs(_exId - _cuId) * 150;
             // 기본 속도는 350 ----- + 이동하려는 ID와의 간격에 따라 150 속도를 추가
             // 1 - 350 + 150

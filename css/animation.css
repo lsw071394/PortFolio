@@ -31,7 +31,7 @@
     100% {-webkit-transform: rotate(-360deg);}
 }
 @-webkit-keyframes gearRotate{
-    100% {-webkit-transform: rotate(-360deg);}
+    100% {-webkit-transform: rotate(360deg);}
 }
 
 
@@ -51,7 +51,7 @@
 }
 @keyframes animated-text{
     from{width: 0;}
-    to{width: 800px;}
+    to{width: 100%;}
   }
   
 

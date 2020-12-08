@@ -3,10 +3,12 @@ console.log("Script Load");
     $(document).ready(function() {
         console.log('jQuery Ready');
 
-        var _scrollTop = null;
+        var _scrollTop = $(window).scrollTop();
         var _isAni = void 0; // undefined 강제 지정
 
         var transitionEnd = true;
+
+      
 
         function init() {
             layout();
@@ -36,19 +38,22 @@ console.log("Script Load");
         }
 
         function addEvent() {
-            $win.on('resize', onResize);
             $win.on('scroll', onScrollWin).trigger('scroll');
             $('nav a').on('click', onClick);
-            $('article').on('wheel', fullpage),{ passive: false };
-            
+            $('#logo').on('click', onClickLogo);
         }
-        function onResize(e){
-            $('article').css({'height' : 100+'vh'})
-        };
 
 
 
 
+        setTimeout(function(){
+            $('article').on('wheel', fullpage),{ passive: false };    
+        },3700);
+        
+        
+
+
+        
         function onScrollWin(e) {
             // console.log('window scroll');
             _scrollTop = $win.scrollTop(); // 스크롤 Y 좌표.
@@ -96,9 +101,15 @@ console.log("Script Load");
 
         
         var $imgels = $('#skill .photo-box img');
-        var $progressEl = $('.progress-bar-fill')
+        var $progressEl = $('.progress-bar-fill');
+        var $isAni = true;
 
         function progress(){
+
+                if(!$isAni){
+                    return false;
+                }
+
                 if(count == 3) {
                     setTimeout(function(){
                         $imgels.eq(0).css({'opacity': 1, 'transition' : 'all 1s ease-in-out', 'animation' : 'hovering 1s infinite ease-in-out'});
@@ -107,7 +118,7 @@ console.log("Script Load");
                         $imgels.eq(3).css({'opacity': 1, 'transition' : 'all 2.5s ease-in-out', 'animation' : 'hovering 1s infinite ease-in-out'});
                         $imgels.eq(4).css({'opacity': 1, 'transition' : 'all 3s ease-in-out', 'animation' : 'hovering 1s infinite ease-in-out'});
                         $imgels.eq(5).css({'opacity': 1, 'transition' : 'all 3.5s ease-in-out', 'animation' : 'hovering 1s infinite ease-in-out'});
-                    },1500);
+                    },2000);
                     setTimeout(function(){
                         $progressEl.eq(0).animate({width : '80%',backgroundColor : 'black'},{duration : 1000});
                         $progressEl.eq(1).animate({width : '60%',backgroundColor : 'black'},{duration : 1000});
@@ -124,12 +135,14 @@ console.log("Script Load");
 
         }
         
-            
+
         
+
         
         function onClick(e){
+            console.log('click');
             e.preventDefault();            
-            var index = $( "nav a" ).index( this );
+            var index = $( "nav a").index( this );
             console.log(index);
 
             var href = $(this).attr('href')
@@ -139,7 +152,18 @@ console.log("Script Load");
             },{duration : 500})
             count = index;
             progress();
-         
+        }
+
+
+        function onClickLogo(e){
+            e.preventDefault();            
+            var href = $('#logo').attr('href');
+            var top = $('#main').offset().top
+            $('html,body').animate({
+                'scrollTop': top
+            },{duration : 500})
+            count = 0;
+            progress();
         }
 
         
@@ -151,13 +175,14 @@ console.log("Script Load");
 
 
         var h = 0;
+
         $(window).scroll(function () {
             var scrT = parseInt($(this).scrollTop());
-          h=$(window).height();
-           $(window).resize(function(){
-            h=$(window).height()
-            });
-    
+            h=$(window).height();
+            $(window).resize(function(){
+                h=$(window).height()
+                });
+        
             $('article').each(function(i){
                     var secTop=$(this).offset().top;
      
@@ -179,7 +204,7 @@ console.log("Script Load");
             },1000);
         }
         
-
+       
 
      
         
@@ -204,7 +229,6 @@ console.log("Script Load");
                         },{duration : 1000});
                         tEnd();
                     }
-                    
                 }
                 else {
                     if(count < $('article').length-1){
@@ -215,15 +239,45 @@ console.log("Script Load");
                     'scrollTop': next
                 },{duration : 1000});
                         tEnd();
-                        
                     }
-                  
                 }
                 
                 progress();
         }
 
-         
+        fatimesEl = document.querySelector('.fa-times');
+        fatimesEl.addEventListener('click', closecontact);
+        contactEl.addEventListener('click', opencontact);
+        
+        function closecontact(){
+            // for(var i = 0; i <gear.length; i++){
+            //     if(count > 0){
+            //         gear[i].style.opacity = '0.3';
+            //         gear[i].style.transition = 'all 0.1s ease-in'
+            //     }
+                
+        
+            // }
+            
+            contactbodyEl.style.transform = 'translate(-50%,-50%) scale(0)';
+            contactbodyEl.style.transition = 'all 0.3s ease-in-out';
+        }
+        
+        
+        function opencontact(e){
+            // for(var i = 0; i <gear.length; i++){
+            //     if(count > 0){
+            //         gear[i].style.opacity = '1';
+            //         gear[i].style.transition = 'all 0.6s ease-in'
+            //     }
+                
+            // }
+                contactbodyEl.style.transform = 'translate(-50%,-50%) scale(1)';
+                contactbodyEl.style.opacity = '1';
+                // contactbodyEl.style.transform = 'translateY(0)';
+                contactbodyEl.style.transition = 'all 0.3s ease-in-out';
+        }
+        
          
         
 
