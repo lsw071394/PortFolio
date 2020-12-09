@@ -208,20 +208,15 @@ console.log("Script Load");
        
         function onResize(){
              var $winH = $win.height();
-             console.log($winH);
-             console.log( $article.height());
+             
              $article.height($winH);
-             console.log($('article').eq(count).offset().top);
+             
 
-             var prev =  $('article').eq(count).prev().offset().top;
+             var $resizeArticle =  $('article').eq(count).offset().top;
                             $('html,body').stop().animate({
-                            'scrollTop': prev
-                        },{duration : 1000});
-                        
-            var next=  $('article').eq(count).offset().top;
-                            $('html,body').stop().animate({
-                                'scrollTop': next
-                            },{duration : 1000});
+                            'scrollTop': $resizeArticle
+                        },{duration : 500});
+
         }   
      
         
