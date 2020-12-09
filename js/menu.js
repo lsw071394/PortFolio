@@ -2,10 +2,10 @@ console.log("Script Load");
 (function($){
     $(document).ready(function() {
         console.log('jQuery Ready');
-
+        let count = 0;
         var _scrollTop = $(window).scrollTop();
         var _isAni = void 0; // undefined 강제 지정
-
+        var _this = this;
         var transitionEnd = true;
 
       
@@ -38,6 +38,7 @@ console.log("Script Load");
         }
 
         function addEvent() {
+            $win.on('resize', onResize);
             $win.on('scroll', onScrollWin).trigger('scroll');
             $('nav a').on('click', onClick);
             $('#logo').on('click', onClickLogo);
@@ -205,11 +206,27 @@ console.log("Script Load");
         }
         
        
+        function onResize(){
+             var $winH = $win.height();
+             console.log($winH);
+             console.log( $article.height());
+             $article.height($winH);
+             console.log($('article').eq(count).offset().top);
 
+             var prev =  $('article').eq(count).prev().offset().top;
+                            $('html,body').stop().animate({
+                            'scrollTop': prev
+                        },{duration : 1000});
+                        
+            var next=  $('article').eq(count).offset().top;
+                            $('html,body').stop().animate({
+                                'scrollTop': next
+                            },{duration : 1000});
+        }   
      
         
 
-        var count = 0;
+        
         
         
         function fullpage(e){
@@ -235,6 +252,7 @@ console.log("Script Load");
                         count++;
                         console.log(count);
                         var next=  $(this).next().offset().top;
+                        
                   $('html,body').stop().animate({
                     'scrollTop': next
                 },{duration : 1000});
