@@ -147,56 +147,68 @@ console.log("Script Load");
         }
        
         var count = 0;
-        function fullpage(e) {
-            e.preventDefault();
 
-            if (!transitionEnd) {
-                return;
+        if($(window).innerWidth() > 1100){
+            function fullpage(e) {
+                e.preventDefault();
+    
+                if (!transitionEnd) {
+                    return;
+                };
+                // var m = e.originalEvent.wheelDelta;
+                if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
+                    if (count > 0) {
+                        count--;
+                        console.log(count);
+                        var prev = $(this).prev().offset().top;
+                        $('html,body').stop().animate({
+                            'scrollTop': prev
+                        }, { duration: 500 });
+                        tEnd();
+                    }
+                }
+                else {
+                    if (count < $('article').length - 1) {
+                        count++;
+                        console.log(count);
+                        var next = $(this).next().offset().top;
+                        $('html,body').stop().animate({
+                            'scrollTop': next
+                        }, { duration: 500 });
+                        tEnd();
+                    }
+                }
+                progress();
             };
-            // var m = e.originalEvent.wheelDelta;
-            if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
-                if (count > 0) {
-                    count--;
-                    console.log(count);
-                    var prev = $(this).prev().offset().top;
-                    $('html,body').stop().animate({
-                        'scrollTop': prev
-                    }, { duration: 500 });
-                    tEnd();
-                }
-            }
-            else {
-                if (count < $('article').length - 1) {
-                    count++;
-                    console.log(count);
-                    var next = $(this).next().offset().top;
-                    $('html,body').stop().animate({
-                        'scrollTop': next
-                    }, { duration: 500 });
-                    tEnd();
-                }
-            }
-            progress();
-        };
+        }
+       
         
-        // if($(window).innerWidth() < 1100){
-        //     $('html').css({'overflow' : 'scroll'})
-        //     $('article').remove('wheel', fullpage);
-        //     setTimeout(function () {
-        //         $imgels.eq(0).css({ 'opacity': 1, 'transition': 'all 1s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
-        //         $imgels.eq(1).css({ 'opacity': 1, 'transition': 'all 1.5s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
-        //         $imgels.eq(2).css({ 'opacity': 1, 'transition': 'all 2s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
-        //         $imgels.eq(3).css({ 'opacity': 1, 'transition': 'all 2.5s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
-        //         $imgels.eq(4).css({ 'opacity': 1, 'transition': 'all 3s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
-        //         $imgels.eq(5).css({ 'opacity': 1, 'transition': 'all 3.5s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
-        //         $progressEl.eq(0).animate({ width: '80%', backgroundColor: 'black' }, { duration: 1000 });
-        //         $progressEl.eq(1).animate({ width: '60%', backgroundColor: 'black' }, { duration: 1000 });
-        //         $progressEl.eq(2).animate({ width: '65%', backgroundColor: 'black' }, { duration: 1000 });
-        //         $progressEl.eq(3).animate({ width: '50%', backgroundColor: 'black' }, { duration: 1000 });
-        //         $progressEl.eq(4).animate({ width: '50%', backgroundColor: 'black' }, { duration: 1000 });
-        //     }, 1000);
-        // }
-
+        if($(window).innerWidth() < 1100){
+            $('html').css({'overflow' : 'scroll'})
+            $('article').remove('wheel', fullpage);
+            setTimeout(function () {
+                $imgels.eq(0).css({ 'opacity': 1, 'transition': 'all 1s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
+                $imgels.eq(1).css({ 'opacity': 1, 'transition': 'all 1.5s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
+                $imgels.eq(2).css({ 'opacity': 1, 'transition': 'all 2s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
+                $imgels.eq(3).css({ 'opacity': 1, 'transition': 'all 2.5s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
+                $imgels.eq(4).css({ 'opacity': 1, 'transition': 'all 3s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
+                $imgels.eq(5).css({ 'opacity': 1, 'transition': 'all 3.5s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
+                $progressEl.eq(0).animate({ width: '80%', backgroundColor: 'black' }, { duration: 1000 });
+                $progressEl.eq(1).animate({ width: '60%', backgroundColor: 'black' }, { duration: 1000 });
+                $progressEl.eq(2).animate({ width: '65%', backgroundColor: 'black' }, { duration: 1000 });
+                $progressEl.eq(3).animate({ width: '50%', backgroundColor: 'black' }, { duration: 1000 });
+                $progressEl.eq(4).animate({ width: '50%', backgroundColor: 'black' }, { duration: 1000 });
+            }, 1000);
+            $(window).scroll(function () {
+                var height = $(document).scrollTop();
+                console.log(height);
+                if (height >= 200) {
+                    $('.gear').animate({ opacity: 0.3 }, { duration: 100 })
+                } else if (height < 200) {
+                    $('.gear').animate({ opacity: 1 }, { duration: 100 })
+                }
+            });
+        }
 
 
         init();
