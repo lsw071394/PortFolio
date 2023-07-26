@@ -34,7 +34,6 @@ console.log("Script Load");
             $win.on('resize', onResize);
             $win.on('scroll', onScrollWin).trigger('scroll');
             $('nav a').on('click', onClick);
-
         }
         function onResize(e) {
             $('article').css({ 'height': 100 + 'vh' })
@@ -146,44 +145,7 @@ console.log("Script Load");
                 transitionEnd = true;
             }, 1000);
         }
-        setTimeout(() => {
-            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                console.log('MOBILE');
-                var startX, startY, endX, endY;
-                $(".article-wrap").on('touchstart', function (event) {
-                    startX = event.originalEvent.changedTouches[0].screenX;
-                    startY = event.originalEvent.changedTouches[0].screenY;
-                });
-                $(".article-wrap").on('touchend', function (event) {
-                    endX = event.originalEvent.changedTouches[0].screenX;
-                    endY = event.originalEvent.changedTouches[0].screenY;
-                    if (startY - endY > 50) {
-                        if (count < $('article').length - 1) {
-                            count++;
-                            console.log(count);
-                            var next = $(this).next().offset().top;
-                            $('html,body').stop().animate({
-                                'scrollTop': next
-                            }, { duration: 500 });
-                            tEnd();
-                        }
-                    } else if (endY - startY > 50) {
-                        if (count > 0) {
-                            count--;
-                            console.log(count);
-                            var prev = $(this).prev().offset().top;
-                            $('html,body').stop().animate({
-                                'scrollTop': prev
-                            }, { duration: 500 });
-                            tEnd();
-                        }
-                    }
-                    progress();
-                });
-            }
-        }, 2500);
-        
-
+       
         var count = 0;
         function fullpage(e) {
             e.preventDefault();
@@ -215,7 +177,28 @@ console.log("Script Load");
                 }
             }
             progress();
-        }
+        };
+        
+        // if($(window).innerWidth() < 1100){
+        //     $('html').css({'overflow' : 'scroll'})
+        //     $('article').remove('wheel', fullpage);
+        //     setTimeout(function () {
+        //         $imgels.eq(0).css({ 'opacity': 1, 'transition': 'all 1s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
+        //         $imgels.eq(1).css({ 'opacity': 1, 'transition': 'all 1.5s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
+        //         $imgels.eq(2).css({ 'opacity': 1, 'transition': 'all 2s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
+        //         $imgels.eq(3).css({ 'opacity': 1, 'transition': 'all 2.5s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
+        //         $imgels.eq(4).css({ 'opacity': 1, 'transition': 'all 3s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
+        //         $imgels.eq(5).css({ 'opacity': 1, 'transition': 'all 3.5s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
+        //         $progressEl.eq(0).animate({ width: '80%', backgroundColor: 'black' }, { duration: 1000 });
+        //         $progressEl.eq(1).animate({ width: '60%', backgroundColor: 'black' }, { duration: 1000 });
+        //         $progressEl.eq(2).animate({ width: '65%', backgroundColor: 'black' }, { duration: 1000 });
+        //         $progressEl.eq(3).animate({ width: '50%', backgroundColor: 'black' }, { duration: 1000 });
+        //         $progressEl.eq(4).animate({ width: '50%', backgroundColor: 'black' }, { duration: 1000 });
+        //     }, 1000);
+        // }
+
+
+
         init();
     });
 })(jQuery);
