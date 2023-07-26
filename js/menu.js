@@ -185,7 +185,6 @@ console.log("Script Load");
         
         if($(window).innerWidth() < 1100){
             $('html').css({'overflow' : 'scroll'})
-            $('article').remove('wheel', fullpage);
             setTimeout(function () {
                 $imgels.eq(0).css({ 'opacity': 1, 'transition': 'all 1s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
                 $imgels.eq(1).css({ 'opacity': 1, 'transition': 'all 1.5s ease-in-out', 'animation': 'hovering 1s infinite ease-in-out' });
@@ -202,9 +201,9 @@ console.log("Script Load");
             $(window).scroll(function () {
                 var height = $(document).scrollTop();
                 console.log(height);
-                if (height >= 200) {
+                if (height >= 100) {
                     $('.gear').animate({ opacity: 0.3 }, { duration: 100 })
-                } else if (height < 200) {
+                } else if (height < 100) {
                     $('.gear').animate({ opacity: 1 }, { duration: 100 })
                 }
             });
